@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 数据文件
+data/
+*.csv
+
+# 模型文件
+models/
+
+# IDE
+.idea/
+.vscode/
