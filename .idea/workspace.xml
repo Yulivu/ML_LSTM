@@ -6,21 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="453bb105-20f1-43dc-87be-7b8958f65bc1" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/exploration/sp500_data_exploration.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/data/exploration/sp500_data_exploration.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base_lstm_model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/single_layer_lstm_model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/models/single_layer_lstm_model.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/loss.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/lstm_models_comparison.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/predicted_stock_prices.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/predicted_stock_prices.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/single_layer_loss.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/single_layer_predicted_stock_prices.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/single_layer_predicted_stock_prices.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/single_layer_stock_prices.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/stock_prices.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_feature_engineering.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_feature_engineering.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model_building.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_building.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model_building_single_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_building_single_layer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model_complexity_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_complexity_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_exploration.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_exploration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_exploration_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_exploration_v1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +126,7 @@
       <workItem from="1741696881662" duration="178000" />
       <workItem from="1741746367959" duration="6307000" />
       <workItem from="1742719825685" duration="606000" />
-      <workItem from="1743189823988" duration="35000" />
+      <workItem from="1743189823988" duration="610000" />
     </task>
     <servers />
   </component>

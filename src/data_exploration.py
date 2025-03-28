@@ -1,9 +1,3 @@
-"""
-基于LSTM的股价预测: 数据获取与探索
-包括：数据的导入与初步查看、股票价格可视化、趋势与季节性分解、金融危机分析、波动性分析、异常值检测、宏观经济影响、时间分析和交易量分析
-输出：将所有图表保存为单个PDF文件
-"""
-# %% 0. 导入必要的库
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
@@ -19,34 +13,24 @@ import os
 from pathlib import Path
 from matplotlib.backends.backend_pdf import PdfPages
 
-# 导入项目路径配置
-# 获取当前文件的路径
 current_file = Path(__file__)
-# 获取项目根目录
 ROOT_DIR = current_file.parent.parent.absolute()
-# 定义常用目录
 DATA_DIR = ROOT_DIR / 'data'
 RAW_DATA_DIR = DATA_DIR / 'raw'
 EXPLORATION_DIR = DATA_DIR / 'exploration'
 PROCESSED_DATA_DIR = DATA_DIR / 'processed'
-
-# 确保探索结果目录存在
 EXPLORATION_DIR.mkdir(parents=True, exist_ok=True)
 
-# 设置字体为 'Times New Roman'
 matplotlib.rcParams['font.family'] = 'Times New Roman'
-matplotlib.rcParams['figure.figsize'] = (10, 6)  # 设置统一的图表大小
-
-# 创建PDF文件对象
+matplotlib.rcParams['figure.figsize'] = (10, 6)
 pdf_path = EXPLORATION_DIR / 'sp500_data_exploration.pdf'
 pdf = PdfPages(pdf_path)
 
-# %% 1. 读取数据集
+
 print('正在读取数据...')
 sp500_data = pd.read_csv(RAW_DATA_DIR / 'SPX.csv', parse_dates=True)
 sp500_data['Date'] = pd.to_datetime(sp500_data['Date'])  # 将 'Date' 列转换为 datetime 类型
 
-# %% 2. 查看初步信息
 print('数据概览:')
 print(sp500_data.info())
 print('\n前5行数据:')
@@ -54,51 +38,39 @@ print(sp500_data.head())
 print('\n后5行数据:')
 print(sp500_data.tail())
 
-# 将 "Date" 列设置为索引，并按日期排序
 sp500_data = sp500_data.set_index(sp500_data['Date']).sort_index()
 
-# 输出交易量开始大于 0 的前 5 行数据
 volume_data = sp500_data[sp500_data['Volume'] > 0]
 print('\n交易量>0的前5行数据:')
 print(volume_data.head())
 
-# 绘制 "Volume" 时间曲线图
 plt.figure(figsize=(10, 6))
 plt.plot(sp500_data.index, sp500_data['Volume'], label='Volume', color='blue')
 
-# 设置图形标题和标签
 plt.title('S&P 500 Volume Over Time')
 plt.xlabel('Date')
 plt.ylabel('Volume')
 
-# 设置主刻度为每 20 年显示一次年份
-years = mdates.YearLocator(20)  # 每隔 20 年设置一个刻度
-years_fmt = mdates.DateFormatter('%Y')  # 格式化为年份
+years = mdates.YearLocator(20)
+years_fmt = mdates.DateFormatter('%Y')
 
-# 应用格式化到 x 轴
 ax = plt.gca()
 ax.xaxis.set_major_locator(years)
 ax.xaxis.set_major_formatter(years_fmt)
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# 考虑 2000 年后的数据
 sp500_data_filtered = sp500_data.loc['2000-01-01':]
 
-# %% 3. 股票价格可视化
-
-# 绘制 "Close" 时间曲线图
 plt.figure(figsize=(10, 6))
 plt.plot(sp500_data_filtered['Date'], sp500_data_filtered['Close'], label='Close', color='blue')
 plt.title('S&P 500 Close Over Time')
 plt.xlabel('Date')
 plt.ylabel('Close')
 
-# 设置主刻度为每 5 年显示一次年份
 years = mdates.YearLocator(5)
 years_fmt = mdates.DateFormatter('%Y')
 ax = plt.gca()
@@ -106,33 +78,22 @@ ax.xaxis.set_major_locator(years)
 ax.xaxis.set_major_formatter(years_fmt)
 plt.xticks(rotation=45)
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# 绘制 "Close" 分布曲线图
 plt.figure(figsize=(10, 6))
 sns.kdeplot(sp500_data_filtered['Close'], fill=True)
 plt.title('S&P 500 Close Distribution')
 plt.xlabel('Close')
 plt.ylabel('Density')
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# %% 4. 趋势与季节性分解
-
-# 提取收盘价数据
 close_series = sp500_data_filtered['Close']
 
-# 进行时间序列分解，使用multiplicative模型，周期为365（假设年周期性）
-print('正在进行时间序列分解...')
+print('正在进行时间序列分解.')
 decomposition = seasonal_decompose(close_series, model='multiplicative', period=365)
-
-# 绘制趋势、季节性和残差
 plt.figure(figsize=(10, 10))
 
 plt.subplot(411)
@@ -152,35 +113,23 @@ plt.plot(decomposition.resid, label='Residuals')
 plt.title('Residuals')
 
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# %% 5. 金融危机分析
-
-# 设定金融危机期间 (2007年11月 - 2009年3月)
 crisis_period = (sp500_data_filtered.index >= '2007-11-01') & (sp500_data_filtered.index <= '2009-03-01')
 
-# 设定经济复苏期间 (2009年3月 - 2012年)
 recovery_period = (sp500_data_filtered.index > '2009-03-01') & (sp500_data_filtered.index <= '2012-12-31')
 
-# 提取这些时间段的数据
 crisis_data = sp500_data_filtered[crisis_period]
 recovery_data = sp500_data_filtered[recovery_period]
-
-# 绘制S&P 500 指数在金融危机期间和复苏期间的收盘价趋势
 plt.figure(figsize=(10, 10))
 
-# 金融危机期间
 plt.subplot(2, 1, 1)
 plt.plot(crisis_data.index, crisis_data['Close'], label='During Financial Crisis', color='red')
 plt.title('S&P 500 Closing Price - Financial Crisis (2007-11 - 2009-03)')
 plt.xlabel('Date')
 plt.ylabel('Closing Price')
 plt.legend()
-
-# 复苏期间
 plt.subplot(2, 1, 2)
 plt.plot(recovery_data.index, recovery_data['Close'], label='During Recovery Period', color='green')
 plt.title('S&P 500 Closing Price - Recovery Period (2009-03 - 2012-12)')
@@ -190,25 +139,19 @@ plt.legend()
 
 plt.tight_layout()
 
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# %% 6. 波动性分析
 
 print('进行波动性分析...')
-# 1. 计算日收益率
 sp500_data_filtered['Returns'] = sp500_data_filtered['Close'].pct_change()
 
-# 2. 计算20天移动标准差作为短期波动性指标
 window_size = 20  # 窗口大小为20天
 sp500_data_filtered['Rolling_Std'] = sp500_data_filtered['Close'].rolling(window=window_size).std()
 
-# 3. 计算年化波动率（基于每日收益率）
 # 年化波动率 = 每日收益率的标准差 × √252
 sp500_data_filtered['Volatility'] = sp500_data_filtered['Returns'].rolling(window=window_size).std() * np.sqrt(252)
 
-# 4. 绘制收盘价、移动标准差（波动性）和年化波动率
 plt.figure(figsize=(10, 12))
 
 # 子图1: 收盘价
@@ -269,9 +212,8 @@ pdf.savefig()
 plt.close()
 
 
-# 2. 使用 Z 分数法检测异常值
 
-# 定义 Z 分数函数，z = (x - mean) / std
+# Z 分数函数，z = (x - mean) / std
 def z_score(df, column_name):
     return (df[column_name] - df[column_name].mean()) / df[column_name].std()
 
@@ -280,7 +222,6 @@ def z_score(df, column_name):
 sp500_data_filtered['Close_zscore'] = z_score(sp500_data_filtered, 'Close')
 sp500_data_filtered['Volume_zscore'] = z_score(sp500_data_filtered, 'Volume')
 
-# 设置 Z 分数的阈值，通常超过3或小于-3的值被视为异常值
 z_threshold = 3
 
 # 识别出异常的收盘价和交易量
@@ -314,18 +255,14 @@ plt.legend()
 
 plt.tight_layout()
 
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# %% 8. 宏观经济影响
 
 print('分析宏观经济影响...')
-# 设置数据起始时间
 start = datetime.datetime(2000, 1, 1)
 end = datetime.datetime(2020, 11, 4)
 
-# 获取联邦基金利率数据
 try:
     interest_rate_data = web.DataReader('DFF', 'fred', start, end)
     print("成功获取利率数据")
@@ -334,25 +271,15 @@ try:
     cpi_data = web.DataReader('CPIAUCSL', 'fred', start, end)
     print("成功获取CPI数据")
 
-    # 计算通胀率：CPI变化的百分比
     cpi_data['Inflation_Rate'] = cpi_data.pct_change() * 100
-
-    # 重命名列，确保列名唯一，便于合并
     interest_rate_data.columns = ['Interest_Rate']
     cpi_data.columns = ['CPI', 'Inflation_Rate']
 
-    # 合并两个DataFrame
     macro_data = pd.merge(interest_rate_data, cpi_data, left_index=True, right_index=True, how='outer')
-
-    # 按日期排序
     macro_data.sort_index(inplace=True)
-
-    # 处理缺失值（使用插值或前向填充）
     macro_data['CPI'] = macro_data['CPI'].interpolate(method='linear')  # 插值法
     macro_data['Inflation_Rate'] = macro_data['Inflation_Rate'].ffill()  # 前向填充
     macro_data['Interest_Rate'] = macro_data['Interest_Rate'].ffill()  # 前向填充
-
-    # 合并数据：按日期合并利率、通胀率和S&P 500数据
     sp500_macro_data = sp500_data_filtered[['Close']].join(macro_data, how='inner')
 
     # 绘制利率、通胀率和S&P 500收盘价
@@ -385,12 +312,9 @@ try:
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 
     plt.tight_layout()
-
-    # 保存到PDF
     pdf.savefig()
     plt.close()
 
-    # 可视化特征与收盘价的关系
     plt.figure(figsize=(10, 6))
 
     # 利率与收盘价的关系
@@ -409,14 +333,13 @@ try:
 
     plt.tight_layout()
 
-    # 保存到PDF
     pdf.savefig()
     plt.close()
 except Exception as e:
     print(f"获取宏观经济数据失败: {e}")
     print("跳过宏观经济分析部分，继续执行其他分析...")
 
-# %% 9. 时间分析
+#9. 时间分析
 print('进行时间分析...')
 # 时间频率检查
 time_diff_counts = sp500_data_filtered['Date'].diff().value_counts()
@@ -441,22 +364,14 @@ try:
     merged_data = pd.merge(all_trading_days_df.set_index('Date'), sp500_data_filtered[['Close']],
                            left_index=True, right_index=True, how='left')
 
-    # 检查缺失值
     missing_dates = merged_data[merged_data['Close'].isna()]
-
-    # 输出缺失的日期数量
     print(f"发现 {len(missing_dates)} 个缺失的交易日数据")
 
     # 可视化缺失日期的分布
     if len(missing_dates) > 0:
-        # 创建缺失标记列
         merged_data['is_missing'] = merged_data['Close'].isna()
-
-        # 按年和月分组统计缺失情况
         merged_data['year'] = merged_data.index.year
         merged_data['month'] = merged_data.index.month
-
-        # 统计每年的缺失数量
         yearly_missing = merged_data.groupby('year')['is_missing'].sum()
 
         plt.figure(figsize=(10, 6))
@@ -466,17 +381,14 @@ try:
         plt.ylabel('Count of Missing Days')
         plt.tight_layout()
 
-        # 保存到PDF
         pdf.savefig()
         plt.close()
 except Exception as e:
     print(f"时间分析部分出错: {e}")
     print("跳过时间分析中的交易日历比较，继续执行其他分析...")
 
-# %% 10. 交易量分析
 
 print('进行交易量分析...')
-# 1. 绘制散点图和回归线，观察交易量和价格的关系
 plt.figure(figsize=(10, 6))
 sns.regplot(x=sp500_data_filtered['Volume'], y=sp500_data_filtered['Close'], scatter_kws={'s': 10},
             line_kws={'color': 'red'})
@@ -486,7 +398,6 @@ plt.ylabel('Close Price', fontsize=12)
 plt.grid(True)
 plt.tight_layout()
 
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -514,12 +425,8 @@ plt.text(0.5, 0.5, f"Volume-Price Correlation: {correlation:.4f}\nP-value: {p_va
          horizontalalignment='center', verticalalignment='center',
          fontsize=16, transform=plt.gca().transAxes)
 plt.axis('off')
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
-
-# 添加摘要页
 plt.figure(figsize=(10, 8))
 plt.text(0.5, 0.5, "S&P 500 Data Exploration Summary\n\n" +
          f"Data Period: {sp500_data_filtered.index.min().strftime('%Y-%m-%d')} to {sp500_data_filtered.index.max().strftime('%Y-%m-%d')}\n" +
@@ -535,12 +442,8 @@ plt.text(0.5, 0.5, "S&P 500 Data Exploration Summary\n\n" +
          horizontalalignment='center', verticalalignment='center',
          fontsize=14, transform=plt.gca().transAxes)
 plt.axis('off')
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
-
-# 关闭PDF文件
 pdf.close()
 
 print(f"探索性分析完成，所有图表已保存到 PDF 文件: {pdf_path}")

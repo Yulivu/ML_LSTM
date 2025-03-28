@@ -1,9 +1,3 @@
-"""
-基于LSTM的股价预测: 数据获取与探索
-包括：数据的导入与初步查看、股票价格可视化、趋势与季节性分解、金融危机分析、波动性分析、异常值检测、宏观经济影响、时间分析和交易量分析
-输出：将所有图表保存为单个PDF文件
-"""
-# %% 0. 导入必要的库
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
@@ -19,36 +13,26 @@ import os
 from pathlib import Path
 from matplotlib.backends.backend_pdf import PdfPages
 
-# 导入项目路径配置
-# 获取当前文件的路径
 current_file = Path(__file__)
-# 获取项目根目录
 ROOT_DIR = current_file.parent.absolute()
-
-# 定义常用目录
 DATA_DIR = ROOT_DIR / "data"
 RAW_DATA_DIR = DATA_DIR / "raw"
 EXPLORATION_DIR = DATA_DIR / "exploration"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 
-# 确保所有必要的目录都存在
 for directory in [DATA_DIR, RAW_DATA_DIR, EXPLORATION_DIR, PROCESSED_DATA_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
-# 设置字体为 'Times New Roman'
 matplotlib.rcParams['font.family'] = 'Times New Roman'
 matplotlib.rcParams['figure.figsize'] = (10, 6)  # 设置统一的图表大小
 
-# 创建PDF文件对象
 pdf_path = EXPLORATION_DIR / 'sp500_data_exploration.pdf'
 pdf = PdfPages(pdf_path)
 
-# %% 1. 读取数据集
 print('正在读取数据...')
 sp500_data = pd.read_csv(RAW_DATA_DIR / 'SPX.csv', parse_dates=True)
 sp500_data['Date'] = pd.to_datetime(sp500_data['Date'])  # 将 'Date' 列转换为 datetime 类型
 
-# %% 2. 查看初步信息
 print('数据概览:')
 print(sp500_data.info())
 print('\n前5行数据:')
@@ -56,28 +40,22 @@ print(sp500_data.head())
 print('\n后5行数据:')
 print(sp500_data.tail())
 
-# 将 "Date" 列设置为索引，并按日期排序
 sp500_data = sp500_data.set_index(sp500_data['Date']).sort_index()
 
-# 输出交易量开始大于 0 的前 5 行数据
 volume_data = sp500_data[sp500_data['Volume'] > 0]
 print('\n交易量>0的前5行数据:')
 print(volume_data.head())
 
-# 绘制 "Volume" 时间曲线图
 plt.figure(figsize=(10, 6))
 plt.plot(sp500_data.index, sp500_data['Volume'], label='Volume', color='blue')
 
-# 设置图形标题和标签
 plt.title('S&P 500 Volume Over Time')
 plt.xlabel('Date')
 plt.ylabel('Volume')
 
-# 设置主刻度为每 20 年显示一次年份
-years = mdates.YearLocator(20)  # 每隔 20 年设置一个刻度
-years_fmt = mdates.DateFormatter('%Y')  # 格式化为年份
+years = mdates.YearLocator(20)
+years_fmt = mdates.DateFormatter('%Y')
 
-# 应用格式化到 x 轴
 ax = plt.gca()
 ax.xaxis.set_major_locator(years)
 ax.xaxis.set_major_formatter(years_fmt)
@@ -154,12 +132,10 @@ plt.plot(decomposition.resid, label='Residuals')
 plt.title('Residuals')
 
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
-# %% 5. 金融危机分析
+
 
 # 设定金融危机期间 (2007年11月 - 2009年3月)
 crisis_period = (sp500_data_filtered.index >= '2007-11-01') & (sp500_data_filtered.index <= '2009-03-01')
@@ -173,8 +149,6 @@ recovery_data = sp500_data_filtered[recovery_period]
 
 # 绘制S&P 500 指数在金融危机期间和复苏期间的收盘价趋势
 plt.figure(figsize=(10, 10))
-
-# 金融危机期间
 plt.subplot(2, 1, 1)
 plt.plot(crisis_data.index, crisis_data['Close'], label='During Financial Crisis', color='red')
 plt.title('S&P 500 Closing Price - Financial Crisis (2007-11 - 2009-03)')
@@ -242,8 +216,6 @@ plt.grid(True)
 plt.legend()
 
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -265,8 +237,6 @@ sns.boxplot(y=sp500_data_filtered['Volume'], color='lightgreen')
 plt.title('Box Plot of S&P 500 Trading Volume')
 
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -315,8 +285,6 @@ plt.ylabel('Volume')
 plt.legend()
 
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -387,8 +355,6 @@ try:
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 
     plt.tight_layout()
-
-    # 保存到PDF
     pdf.savefig()
     plt.close()
 
@@ -410,8 +376,6 @@ try:
     plt.ylabel('S&P 500 Closing Price')
 
     plt.tight_layout()
-
-    # 保存到PDF
     pdf.savefig()
     plt.close()
 except Exception as e:
@@ -446,7 +410,6 @@ try:
     # 检查缺失值
     missing_dates = merged_data[merged_data['Close'].isna()]
 
-    # 输出缺失的日期数量
     print(f"发现 {len(missing_dates)} 个缺失的交易日数据")
 
     # 可视化缺失日期的分布
@@ -467,8 +430,6 @@ try:
         plt.xlabel('Year')
         plt.ylabel('Count of Missing Days')
         plt.tight_layout()
-
-        # 保存到PDF
         pdf.savefig()
         plt.close()
 except Exception as e:
@@ -487,8 +448,6 @@ plt.xlabel('Trading Volume', fontsize=12)
 plt.ylabel('Close Price', fontsize=12)
 plt.grid(True)
 plt.tight_layout()
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -516,8 +475,6 @@ plt.text(0.5, 0.5, f"Volume-Price Correlation: {correlation:.4f}\nP-value: {p_va
          horizontalalignment='center', verticalalignment='center',
          fontsize=16, transform=plt.gca().transAxes)
 plt.axis('off')
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
 
@@ -537,12 +494,8 @@ plt.text(0.5, 0.5, "S&P 500 Data Exploration Summary\n\n" +
          horizontalalignment='center', verticalalignment='center',
          fontsize=14, transform=plt.gca().transAxes)
 plt.axis('off')
-
-# 保存到PDF
 pdf.savefig()
 plt.close()
-
-# 关闭PDF文件
 pdf.close()
 
 print(f"探索性分析完成，所有图表已保存到 PDF 文件: {pdf_path}")
