@@ -14,17 +14,23 @@ from sklearn.preprocessing import MinMaxScaler
 from pathlib import Path
 
 # 获取项目根目录和数据目录
+# 导入项目路径配置
+# 获取当前文件的路径
 current_file = Path(__file__)
-ROOT_DIR = current_file.parent.parent.absolute()
-DATA_DIR = ROOT_DIR / 'data'
-RAW_DATA_DIR = DATA_DIR / 'raw'
-EXPLORATION_DIR = DATA_DIR / 'exploration'
-PROCESSED_DATA_DIR = DATA_DIR / 'processed'
+# 获取项目根目录
+ROOT_DIR = current_file.parent.absolute()
 
-# 确保目录存在
-EXPLORATION_DIR.mkdir(parents=True, exist_ok=True)
-PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+# 定义常用目录
+DATA_DIR = ROOT_DIR / "data"
+RAW_DATA_DIR = DATA_DIR / "raw"
+EXPLORATION_DIR = DATA_DIR / "exploration"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+FIGURES_DIR = EXPLORATION_DIR / "figures"  # 新增图片保存目录
 
+# 确保所有必要的目录都存在
+for directory in [DATA_DIR, RAW_DATA_DIR, EXPLORATION_DIR, PROCESSED_DATA_DIR, FIGURES_DIR]:
+    directory.mkdir(parents=True, exist_ok=True)
+    
 #%% 1. 读取数据集
 sp500_data = pd.read_csv(RAW_DATA_DIR / 'SPX.csv', parse_dates=['Date'])
 sp500_data = sp500_data.set_index('Date').sort_index()

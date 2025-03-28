@@ -15,17 +15,22 @@ from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# 获取项目根目录和数据目录
 current_file = Path(__file__)
-ROOT_DIR = current_file.parent.parent.absolute()
-DATA_DIR = ROOT_DIR / 'data'
-PROCESSED_DATA_DIR = DATA_DIR / 'processed'
+# 获取项目根目录
+ROOT_DIR = current_file.parent.absolute()
+
+# 定义常用目录
+DATA_DIR = ROOT_DIR / "data"
+RAW_DATA_DIR = DATA_DIR / "raw"
+EXPLORATION_DIR = DATA_DIR / "exploration"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+FIGURES_DIR = EXPLORATION_DIR / "figures"  # 新增图片保存目录
 MODELS_DIR = ROOT_DIR / 'models'
 RESULTS_DIR = ROOT_DIR / 'results'
 
-# 确保目录存在
-MODELS_DIR.mkdir(parents=True, exist_ok=True)
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+# 确保所有必要的目录都存在
+for directory in [DATA_DIR, RAW_DATA_DIR, EXPLORATION_DIR, PROCESSED_DATA_DIR, FIGURES_DIR,MODELS_DIR,RESULTS_DIR]:
+    directory.mkdir(parents=True, exist_ok=True)
 
 # %% 1. 数据加载
 

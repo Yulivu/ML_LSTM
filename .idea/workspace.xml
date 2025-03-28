@@ -7,6 +7,20 @@
     <list default="true" id="453bb105-20f1-43dc-87be-7b8958f65bc1" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/exploration/sp500_data_exploration.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/data/exploration/sp500_data_exploration.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/base_lstm_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/single_layer_lstm_model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/models/single_layer_lstm_model.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/lstm_models_comparison.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/predicted_stock_prices.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/predicted_stock_prices.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/single_layer_loss.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/single_layer_predicted_stock_prices.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/single_layer_predicted_stock_prices.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/single_layer_stock_prices.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/stock_prices.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_feature_engineering.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_feature_engineering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model_building.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_building.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model_building_single_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_building_single_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model_complexity_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model_complexity_analysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,33 +58,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.1.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.data_analysis.executor": "Run",
-    "Python.data_collection.executor": "Run",
-    "Python.data_exploration.executor": "Run",
-    "Python.data_feature_engineering.executor": "Run",
-    "Python.data_preparation.executor": "Run",
-    "Python.lstm_models.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model_building.executor": "Run",
-    "Python.model_building_single_layer.executor": "Run",
-    "Python.model_complexity_analysis.executor": "Run",
-    "Python.train_lstm.executor": "Run",
-    "Python.train_lstm_model.executor": "Run",
-    "Python.train_single_lstm.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_collection.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_exploration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_feature_engineering.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_preparation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.lstm_models.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model_building.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model_building_single_layer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model_complexity_analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_lstm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_lstm_model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_single_lstm.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ML_LSTM" />
@@ -121,7 +135,11 @@
       <workItem from="1741125509246" duration="3589000" />
       <workItem from="1741130677505" duration="216000" />
       <workItem from="1741130900285" duration="4823000" />
-      <workItem from="1741157629069" duration="13758000" />
+      <workItem from="1741157629069" duration="14063000" />
+      <workItem from="1741696881662" duration="178000" />
+      <workItem from="1741746367959" duration="6307000" />
+      <workItem from="1742719825685" duration="606000" />
+      <workItem from="1743189823988" duration="35000" />
     </task>
     <servers />
   </component>
@@ -134,15 +152,15 @@
     <SUITE FILE_PATH="coverage/ML_LSTM$model_complexity_analysis.coverage" NAME="model_complexity_analysis 覆盖结果" MODIFIED="1741159643611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$data_exploration.coverage" NAME="data_exploration 覆盖结果" MODIFIED="1741167185781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$train_lstm.coverage" NAME="train_lstm 覆盖结果" MODIFIED="1741046493041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/ML_LSTM$main.coverage" NAME="main 覆盖结果" MODIFIED="1741158795423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ML_LSTM$model_building_single_layer.coverage" NAME="model_building_single_layer 覆盖结果" MODIFIED="1741170277592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/ML_LSTM$main.coverage" NAME="main 覆盖结果" MODIFIED="1741748900609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ML_LSTM$model_building_single_layer.coverage" NAME="model_building_single_layer 覆盖结果" MODIFIED="1741754210529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$data_collection.coverage" NAME="data_collection 覆盖结果" MODIFIED="1741042573282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$train_single_lstm.coverage" NAME="train_single_lstm 覆盖结果" MODIFIED="1740567147662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ML_LSTM$data_analysis.coverage" NAME="data_analysis 覆盖结果" MODIFIED="1741043711041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$data_feature_engineering.coverage" NAME="data_feature_engineering 覆盖结果" MODIFIED="1741158891507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$data_preparation.coverage" NAME="data_preparation 覆盖结果" MODIFIED="1741041401685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$train_lstm_model.coverage" NAME="train_lstm_model 覆盖结果" MODIFIED="1741045299268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/ML_LSTM$model_building.coverage" NAME="model_building 覆盖结果" MODIFIED="1741168680830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/ML_LSTM$model_building.coverage" NAME="model_building 覆盖结果" MODIFIED="1741753041417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ML_LSTM$config.coverage" NAME="config 覆盖结果" MODIFIED="1741046312838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
